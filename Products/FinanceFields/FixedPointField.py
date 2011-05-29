@@ -17,7 +17,6 @@ from fixedpoint import FixedPoint
 
 class FixedPointField(ObjectField):
     """A field for storing fixed point values"""
-    __implements__ = ObjectField.__implements__
 
     _properties = ObjectField._properties.copy()
     _properties.update({

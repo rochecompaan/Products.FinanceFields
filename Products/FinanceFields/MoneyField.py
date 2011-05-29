@@ -18,7 +18,6 @@ from fixedpoint import FixedPoint
 
 class MoneyField(ObjectField):
     """A field for storing Money"""
-    __implements__ = ObjectField.__implements__
 
     _properties = ObjectField._properties.copy()
     _properties.update({
