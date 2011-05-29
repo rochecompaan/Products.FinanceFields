@@ -1,0 +1,14 @@
+Changelog
+=========
+
+1.1 unreleased
+--------------
+
+- Fixed bug. When a validation error occurs on a form with Money fields,
+  the Money widget couldn't render the string value on the request since
+  it was expecting a proper Money instance.
+
+1.0
+---
+
+- First public release

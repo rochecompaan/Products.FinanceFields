@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+ <object name="financial_properties" meta_type="Plone Property Sheet">
+  <property name="title">Financial Properties</property>
+  <property name="default_currency" type="string">ZAR</property>
+ </object>
+</object>

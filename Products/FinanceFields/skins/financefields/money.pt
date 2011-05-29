@@ -1,0 +1,82 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone">
+
+<head><title></title></head>
+
+<body>
+
+<!-- Money Widgets -->
+<metal:hidden_macro define-macro="hidden">
+<tal:processvalue tal:define="value python:widget.process_value(value, here, field, request.form)">
+<input type="hidden" name="" value=""
+    tal:attributes="name fieldName; value value/amount|nothing;" />
+<input type="hidden" name="" value=""
+    tal:condition="not:field/use_global_currency"
+    tal:attributes="name string:${fieldName}_currency;
+        value python:value and value.currency().int_currency_symbol or '';" />
+</tal:processvalue>
+</metal:hidden_macro>
+
+<metal:view_macro define-macro="view" tal:replace="structure accessor" />
+
+<metal:define define-macro="edit">
+<metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+    <div metal:fill-slot="widget_body">
+    <tal:processvalue tal:define="value python:widget.process_value(value, here, field, request.form)">
+	<input 
+        type="text"
+        name=""
+        value=""
+        size="30"
+        tabindex="#"
+        tal:attributes="name fieldName;
+        value value/amount|nothing;
+        size widget/size;
+        maxlength widget/maxlength|nothing;
+        tabindex tabindex/next;"
+        />
+
+    <tal:con 
+        condition="not: field/use_global_currency">
+      <select class="currency"
+          tal:attributes="name string:${fieldName}_currency;
+                          tabindex tabindex/next;"
+          tal:define="default_currency python:field.getDefaultCurrency(here);
+                      default_currency_symbol python:getattr(default_currency, 'int_currency_symbol', default_currency)">
+
+      <!-- Curreny dropdown -->
+      <option
+          tal:repeat="item python:modules['Products.FinanceFields.config'].CURRENCY_DISPLAY_LIST"
+          tal:attributes="
+              value item;
+              selected python:test(here.checkSelected(item, value and value.currency().int_currency_symbol or default_currency_symbol), 'selected', None); "
+              tal:content="item"
+              i18n:translate=""
+              />
+        </select>
+    </tal:con>
+    <label class="currency"
+        tal:condition="field/use_global_currency"
+        tal:replace="python:field.getGlobalCurrency()">
+        USD
+    </label>
+    </tal:processvalue>
+    </div>
+
+  </metal:use>
+  </metal:define>
+
+
+      <div metal:define-macro="search">
+        <div metal:use-macro="here/widgets/decimal/macros/edit">
+        </div>
+      </div>
+
+    </body>
+
+  </html>
+
