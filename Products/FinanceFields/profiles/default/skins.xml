@@ -11,8 +11,8 @@
             directory="FinanceFields/skins/financefields"/>
     
     <skin-path name="*">
-    <layer insert-after="custom" 
-            name="financefields"/>
+        <layer insert-after="custom" 
+                name="financefields"/>
     </skin-path>
 
 </object>
