@@ -32,19 +32,16 @@
         name=""
         value=""
         size="30"
-        tabindex="#"
         tal:attributes="name fieldName;
         value value/amount|nothing;
         size widget/size;
-        maxlength widget/maxlength|nothing;
-        tabindex tabindex/next;"
+        maxlength widget/maxlength|nothing;"
         />
 
     <tal:con 
         condition="not: field/use_global_currency">
       <select class="currency"
-          tal:attributes="name string:${fieldName}_currency;
-                          tabindex tabindex/next;"
+          tal:attributes="name string:${fieldName}_currency"
           tal:define="default_currency python:field.getDefaultCurrency(here);
                       default_currency_symbol python:getattr(default_currency, 'int_currency_symbol', default_currency)">
 
