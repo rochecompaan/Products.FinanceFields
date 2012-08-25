@@ -25,6 +25,12 @@ setup(name='Products.FinanceFields',
           'setuptools',
           # -*- Extra requirements: -*-
       ],
+      tests_require=[],
+      extras_require={
+        'test': [
+          'plone.app.testing',
+        ],
+      },
       entry_points="""
       # -*- Entry points: -*-
       """,
